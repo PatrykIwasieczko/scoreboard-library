@@ -25,6 +25,16 @@ export class Scoreboard {
     match.awayScore = newAwayScore;
   }
 
+  finishMatch(matchId: number): void {
+    const match = this.matches.find((match) => match.id === matchId);
+
+    if (!match) {
+      throw new Error("There is no match with that id");
+    }
+
+    this.matches.splice(this.matches.indexOf(match), 1);
+  }
+
   getSummary(): Match[] {
     return this.matches;
   }

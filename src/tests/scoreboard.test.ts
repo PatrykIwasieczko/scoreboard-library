@@ -23,4 +23,22 @@ describe("Scoreboard", () => {
     expect(scoreboard.getSummary()[0].homeScore).toBe(1);
     expect(scoreboard.getSummary()[0].awayScore).toBe(0);
   });
+
+  test("should correctly finish match", () => {
+    const scoreboard = new Scoreboard();
+
+    const matchId = scoreboard.startMatch("Argentina", "Brazil");
+    scoreboard.startMatch("Spain", "France");
+    expect(scoreboard.getSummary().length).toEqual(2);
+
+    expect(() => {
+      scoreboard.finishMatch(Math.random());
+    }).toThrow("There is no match with that id");
+
+    scoreboard.finishMatch(matchId);
+    expect(scoreboard.getSummary().length).toEqual(1);
+    expect(
+      scoreboard.getSummary().find((match) => match.id === matchId)
+    ).toBeUndefined();
+  });
 });
