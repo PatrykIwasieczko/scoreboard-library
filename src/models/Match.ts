@@ -9,7 +9,7 @@ export class Match {
   constructor(homeTeam: string, awayTeam: string) {
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
-    this._id = Math.random();
+    this._id = crypto.randomUUID();
     this._startedTimestamp = new Date().toISOString();
   }
 
@@ -25,7 +25,7 @@ export class Match {
     return this._startedTimestamp;
   }
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 

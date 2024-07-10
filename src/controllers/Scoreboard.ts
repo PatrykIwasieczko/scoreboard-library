@@ -3,7 +3,7 @@ import { Match } from "../models/Match";
 export class Scoreboard {
   private matches: Match[] = [];
 
-  startMatch(homeTeam: string, awayTeam: string): number {
+  startMatch(homeTeam: string, awayTeam: string): string {
     const match = new Match(homeTeam, awayTeam);
 
     this.matches.push(match);
@@ -11,7 +11,7 @@ export class Scoreboard {
   }
 
   updateScore(
-    matchId: number,
+    matchId: string,
     newHomeScore: number,
     newAwayScore: number
   ): void {
@@ -25,7 +25,7 @@ export class Scoreboard {
     match.awayScore = newAwayScore;
   }
 
-  finishMatch(matchId: number): void {
+  finishMatch(matchId: string): void {
     const match = this.matches.find((match) => match.id === matchId);
 
     if (!match) {

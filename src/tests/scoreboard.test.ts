@@ -1,6 +1,8 @@
 import { Scoreboard } from "../controllers/Scoreboard";
 
 describe("Scoreboard", () => {
+  const mockedId = "test";
+
   test("should correctly return scoreboard summary", async () => {
     const scoreboard = new Scoreboard();
 
@@ -45,7 +47,7 @@ describe("Scoreboard", () => {
     const scoreboard = new Scoreboard();
 
     const matchId = scoreboard.startMatch("Argentina", "Brazil");
-    expect(typeof matchId).toBe("number");
+    expect(typeof matchId).toBe("string");
 
     expect(scoreboard.getSummary().length).toEqual(1);
   });
@@ -56,7 +58,7 @@ describe("Scoreboard", () => {
     const matchId = scoreboard.startMatch("Argentina", "Brazil");
 
     expect(() => {
-      scoreboard.updateScore(Math.random(), 1, 0);
+      scoreboard.updateScore(mockedId, 1, 0);
     }).toThrow("There is no match with that id");
 
     scoreboard.updateScore(matchId, 1, 0);
@@ -72,7 +74,7 @@ describe("Scoreboard", () => {
     expect(scoreboard.getSummary().length).toEqual(2);
 
     expect(() => {
-      scoreboard.finishMatch(Math.random());
+      scoreboard.finishMatch(mockedId);
     }).toThrow("There is no match with that id");
 
     scoreboard.finishMatch(matchId);
