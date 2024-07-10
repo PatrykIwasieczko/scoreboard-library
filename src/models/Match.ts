@@ -29,7 +29,7 @@ export class Match {
     return this._id;
   }
 
-  set homeScore(newScore: number) {
+  private updateScore(newScore: number, home: boolean) {
     if (!Number.isInteger(newScore)) {
       throw new Error("Score must be an integer");
     }
@@ -38,18 +38,18 @@ export class Match {
       throw new Error("Score cannot be less than 0");
     }
 
-    this._homeScore = newScore;
+    if (home) {
+      this._homeScore = newScore;
+    } else {
+      this._awayScore = newScore;
+    }
+  }
+
+  set homeScore(newScore: number) {
+    this.updateScore(newScore, true);
   }
 
   set awayScore(newScore: number) {
-    if (!Number.isInteger(newScore)) {
-      throw new Error("Score must be an integer");
-    }
-
-    if (newScore < 0) {
-      throw new Error("Score cannot be less than 0");
-    }
-
-    this._awayScore = newScore;
+    this.updateScore(newScore, false);
   }
 }
