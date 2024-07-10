@@ -29,7 +29,11 @@ describe("Match", () => {
     expect(match.awayScore).toEqual(1);
 
     expect(() => {
-      match.homeScore = -1;
+      match.awayScore = 1.5;
+    }).toThrow("Score must be an integer");
+
+    expect(() => {
+      match.awayScore = -1;
     }).toThrow("Score cannot be less than 0");
   });
 });
