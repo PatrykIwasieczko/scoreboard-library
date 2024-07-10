@@ -30,6 +30,10 @@ export class Match {
   }
 
   set homeScore(newScore: number) {
+    if (!Number.isInteger(newScore)) {
+      throw new Error("Score must be an integer");
+    }
+
     if (newScore < 0) {
       throw new Error("Score cannot be less than 0");
     }
@@ -38,6 +42,10 @@ export class Match {
   }
 
   set awayScore(newScore: number) {
+    if (!Number.isInteger(newScore)) {
+      throw new Error("Score must be an integer");
+    }
+
     if (newScore < 0) {
       throw new Error("Score cannot be less than 0");
     }
