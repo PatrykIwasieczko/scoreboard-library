@@ -36,6 +36,15 @@ export class Scoreboard {
   }
 
   getSummary(): Match[] {
-    return this.matches;
+    return this.matches.toSorted((a, b) => {
+      const matchAGoals = a.homeScore + a.awayScore;
+      const matchBGoals = b.homeScore + b.awayScore;
+
+      if (matchAGoals === matchBGoals) {
+        return b.startedTimestamp > a.startedTimestamp ? 1 : -1;
+      }
+
+      return matchBGoals > matchAGoals ? 1 : -1;
+    });
   }
 }
